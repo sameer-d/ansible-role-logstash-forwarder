@@ -1,0 +1,21 @@
+---
+
+- name: Check if logstash-forwarder is already installed.
+  stat: path=/etc/init.d/logstash-forwarder
+  register: logstash_forwarder_installed
+
+
+- name: Install logstash-forwarder.
+  command: "{{ item }}"
+  with_items:
+    - wget ftp://{{ ftpserverpath }}logstashforwarder.deb
+    - dpkg -i logstashforwarder.deb
+
+
+
+# See: http://goo.gl/cz9Lnd
+- name: Install logstash-forwarder init script.
+  copy:
+    src: logstash-forwarder.deb.init
+    dest: /etc/init.d/logstash-forwarder
+    mode: 0755

@@ -3,9 +3,13 @@
   when: ansible_os_family == 'RedHat'
 
 - include: setup-Debian.yml
-  when: ansible_os_family == 'Debian'
+  when: (ansible_architecture == "x86_64")
 
-# See: http://goo.gl/cz9Lnd
+- include: setup-Debian-ppc.yml
+  when: (ansible_architecture == "ppc64")
+
+
+#See: http://goo.gl/cz9Lnd
 # - name: Install logstash-forwarder init script.
 #   get_url:
 #     url: https://raw.github.com/elasticsearch/logstash-forwarder/master/logstash-forwarder.init

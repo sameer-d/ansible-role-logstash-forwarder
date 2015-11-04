@@ -3,11 +3,14 @@
   apt_key:
     url: http://packages.elasticsearch.org/GPG-KEY-elasticsearch
     state: present
+  environment:
 
 - name: Add logstash-forwarder repository.
   apt_repository:
     repo: 'deb http://packages.elasticsearch.org/logstashforwarder/debian stable main'
     state: present
+  environment:
+
 
 - name: Check if logstash-forwarder is already installed.
   stat: path=/etc/init.d/logstash-forwarder
@@ -16,9 +19,11 @@
 - name: Update apt cache if repository just added.
   apt: update_cache=yes
   when: logstash_forwarder_installed.stat.exists == false
+  environment:
 
 - name: Install logstash-forwarder.
   apt: pkg=logstash-forwarder state=present
+  environment:
 
 # See: http://goo.gl/cz9Lnd
 - name: Install logstash-forwarder init script.
