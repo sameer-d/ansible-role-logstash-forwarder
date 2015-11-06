@@ -6,7 +6,7 @@
   when: (ansible_architecture == "x86_64")
 
 - include: setup-Debian-ppc.yml
-  when: (ansible_architecture == "ppc64")
+  when: (ansible_architecture == "ppc64le")
 
 
 #See: http://goo.gl/cz9Lnd
